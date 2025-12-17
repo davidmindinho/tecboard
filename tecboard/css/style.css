@@ -1,0 +1,194 @@
+/* Importando fontes personalizadas usando a regra @font-face*/
+@font-face {
+    font-family: "Unbounded";
+    src: url("../fonts/Unbounded-Bold.ttf")
+    format("truetype");
+    /* Define o peso da fonte como negrito (700). */
+    font-weight: 700;
+    /* Define o estilo da fonte como normal (não itálico). */
+    font-style: normal;
+    /* Melhora a experiência de carregamento da fonte, exibindo o texto com uma fonte alternativa até que a fonte personalizada esteja disponível. */
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../fonts/Poppins-Regular.ttf")
+    format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap ;
+}
+
+/* CSS Reset - Por definição os navegadores já definem estilos padrão para elementos HTML. Para garantir consistência entre navegadores, é comum aplicar um reset CSS. */
+* {
+    /* Margin é o espaçamento externo do elemento.*/
+    margin: 0;
+    /* Padding é o espaçamento interno do elemento.*/
+    padding: 0;
+    /* box-sizing define como as dimensões totais de um elemento são calculadas. Border-box inclui padding e border na largura e altura totais do elemento.*/
+    box-sizing: border-box;
+}
+
+/* Estilos Globais Desktop */
+body{    /* O body representa o corpo do documento HTML, onde todo o conteúdo visível da página é colocado.*/
+    /* background-color define a cor de fundo do elemento.*/
+    background-color: #0E1014;
+    color: #FFFFFF;
+}
+
+/*
+    Nota: problemas de overflow e ícone fora da borda costumam ser causados por:
+    - `width` fixa no container (`header { width: 1200px }`) que não encolhe em telas menores;
+    - imagens (logo/ícone) com tamanho intrínseco grande sem `max-width`/`height:auto`;
+    - padding/margin laterais muito grandes que reduzem a largura útil do container;
+    - soma (padding-esq + logo.width + icon.width + padding-dir) maior que a viewport.
+
+    Correção mínima recomendada (aplicada/explicada abaixo):
+    - permitir que o header encolha (`width:100%` com `max-width`);
+    - limitar logo e ícone (`max-width` / `width` pequenos) e tornar imagens responsivas;
+    - preferir `padding` dentro do header em media queries ao invés de margens laterais fixas.
+*/
+
+header {
+    /* display: flex cria um container flexível que distribui os filhos horizontalmente */
+    display: flex;
+    /* justify-content: space-between coloca a logo na esquerda e o ícone na direita */
+    justify-content: space-between;
+    /* align-items: center alinha verticalmente os elementos no meio */
+    align-items: center;
+    margin: 70px auto 60px auto;
+    width: 1200px;
+}
+
+
+/* box-model é os espaceamentos que envolvem um elemento HTML a extrutura é essa: 
+   -------------------------
+   |        Margin         |  <--- Espaçamento externo
+   -------------------------
+   |       Border          |  <--- Borda do elemento
+   -------------------------
+   |       Padding         |  <--- Espaçamento interno
+   -------------------------
+   |       Content         |  <--- Conteúdo do elemento
+   ------------------------- 
+*/
+
+h1{
+    /* Define o tamanho base da fonte
+    px = pixels
+    pt = points
+    rem = rem units 
+    a conversão de pt para px é 1pt = 1.33px */
+    font-size: 64px;
+    font-family: "Unbounded", sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+p{
+    font-size: 24px; 
+    font-family: "Poppins", sans-serif; 
+    color: #FFFFFF;
+    text-align: center;
+    /* centraliza o bloco do parágrafo quando houver max-width */
+    margin: 24px auto;
+}
+
+/* Quando coloco span após o seletor h1, estou dizendo que quero estilizar apenas os elementos span que estão dentro de um elemento h1. */
+h1 span{
+    color: #9747ff;
+}
+
+a{
+    font-size: 24px; 
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #FFFFFF;
+    /* text-decoration define a decoração do texto, como sublinhado, linha sobre o texto, etc. none remove qualquer decoração padrão de links.*/
+    text-decoration: none;
+    background-color: #9747ff;
+    /* o link não rendeeriza como bloco por padrão, então para aplicar padding e margin, preciso definir o display como inline-block ou block */
+    display: block;
+    /* Agora consigo passar a altura(height) e a largura(width) */
+    width: 340px;
+    height: 66px;
+    /* Centralizando o texto dentro do botão */
+    text-align: center;
+    /* Alinhando o texto verticalmente no meio do botão */
+    line-height: 66px;
+    /* border-radius define o raio das bordas arredondadas do elemento. */
+    border-radius: 36px;
+    /* margin: 40px auto 0 auto; é uma forma abreviada de definir as margens superior, direita, inferior e esquerda do elemento. Nesse caso, a margem superior é de 40px, a margem direita é automática (auto), a margem inferior é 0 e a margem esquerda é automática (auto). As margens automáticas nas laterais centralizam o elemento horizontalmente dentro do seu contêiner pai. Quando passo dois valores o primeiro é para cima e baixo e o segundo é para os lados. Exemplo: margin: 20px 10px;*/
+    margin: 40px auto;
+}
+
+a:hover{
+    /* hover escurece a cor de fundo do botão quando o mouse passa por cima */
+    background-color: #8233e8;
+}
+
+/*
+    A imagem do conteúdo tinha largura fixa (`width: 792px`) — isso impede que ela encolha
+    em telas pequenas e contribui para overflow horizontal. Tornar imagens responsivas com
+    `max-width:100%` e `height:auto` permite que encolham proporcionalmente à viewport.
+*/
+section img{
+        display: block;
+        width: 792px;
+        height: 446px;
+        margin: 40px auto 87px auto;
+}
+
+/* Responsividade - Ajustes para telas menores */
+
+@media (max-width: 768px){
+    /*
+      Em telas <=768px: use padding lateral (interno) em vez de margens laterais grandes.
+      Margens laterais reduzem a largura útil do header; se a soma das larguras internas
+      exceder a viewport, o ícone pode "escapar" para fora. Padding mantém o conteúdo
+      dentro do box e evita esse deslocamento.
+    */
+    header{
+        width: auto;
+        margin: 64px auto;
+        padding: 0 60px;
+        box-sizing: border-box;
+    }
+    
+    p{
+        width: 648px;
+    }
+
+    section img{
+        width: 659px;
+        height: 446px;
+    }
+}
+
+@media (max-width: 375px){
+
+    header{
+        /* mesma ideia para telas muito pequenas: padding reduz o risco de overflow */
+        width: auto;
+        margin: 32px auto;
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+    section img{
+        width: 341px;
+        height: 230px;
+    }
+
+    h1{
+        font-size: 40px;
+        padding: 0 16px;
+    }
+    p{
+        font-size: 20px;
+        width: auto;
+        padding: 0 16px;
+        margin: 24px auto;
+    }
+}
+
