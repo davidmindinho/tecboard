@@ -33,8 +33,8 @@
 /* Estilos Globais Desktop */
 body{    /* O body representa o corpo do documento HTML, onde todo o conteúdo visível da página é colocado.*/
     /* background-color define a cor de fundo do elemento.*/
-    background-color: #0E1014;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #313131;
 }
 
 /*
@@ -89,7 +89,6 @@ h1{
 p{
     font-size: 24px; 
     font-family: "Poppins", sans-serif; 
-    color: #FFFFFF;
     text-align: center;
     /* centraliza o bloco do parágrafo quando houver max-width */
     margin: 24px auto;
