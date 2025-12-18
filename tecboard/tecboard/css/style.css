@@ -80,7 +80,7 @@ h1{
     pt = points
     rem = rem units 
     a conversão de pt para px é 1pt = 1.33px */
-    font-size: 64px;
+    font-size: 80px;
     font-family: "Unbounded", sans-serif;
     font-weight: bold;
     text-align: center;
